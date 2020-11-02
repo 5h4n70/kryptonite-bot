@@ -1,0 +1,4 @@
+#bot token was in .env file
+.env
+node_modules/
+Procfile
