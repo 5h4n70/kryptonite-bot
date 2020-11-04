@@ -10,7 +10,7 @@ app.listen(port, () => console.log(`Bot listening at http://localhost:${port}`))
 
 
 
-
+let CC_id = new Set();
 
 const {
   Client,
@@ -52,7 +52,7 @@ client.once("ready", async () => {
   }).catch(console.error);
   // console.log(client.commands);
 
-// console.log('total members :' + serverMember69);
+  // console.log('total members :' + serverMember69);
 });
 
 
@@ -79,9 +79,9 @@ client.on("message", async message => {
 
   // });
 
-   if(message.channel.id=='756789279610372137'){
-     channelMonitorFunctions.count_channel_monitor(message);
-   }
+  if (message.channel.id == '756789279610372137') {
+    channelMonitorFunctions.count_channel_monitor(message);
+  }
 
 
   client.prefix = prefix;
@@ -95,8 +95,20 @@ client.on("message", async message => {
 
   let command = client.commands.get(cmd);
   if (!command) command = client.commands.get(client.aliases.get(cmd));
-  if (command)
+  if (command) {
+    // if (CC_id.has(cmd) )
+    if (CC_id.has(cmd) && message.author != config.serverOwner)
+      return message.reply("This command has 15sec cooldown!!")
+
     command.run(client, message, args, cmd);
+    if (cmd == 'gnum') {
+      CC_id.add('gnum');
+      setTimeout(function () {
+        CC_id.delete('gnum');
+      }, 15000);
+    }
+
+  }
 });
 
 function channel_monitor(message) {
