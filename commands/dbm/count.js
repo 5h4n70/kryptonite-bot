@@ -6,8 +6,6 @@ const {
 const config = require("../../config.json");
 const Qdb = require('quick.db');
 const myFunctions = require('../../functions.js');
-const asc_tab = require('ascii-table');
-
 
 
 
@@ -46,33 +44,31 @@ module.exports = {
                 d.sort((a, b) => a.data > b.data ? -1 : 1);
                 // console.log(d);
 
-                const embed = new MessageEmbed()
-                    .setTitle("🎀🎀 Top 10 counters 🎀🎀")
-                    .setColor('RANDOM')
-                    // .setDescription(`(max : member)`)
-                    .setTimestamp()
-                    .setFooter(`requested by  ${message.author.tag}`);
-
                 let loop_length = d.length;
                 if (loop_length > 10)
                     loop_length = 10;
-                const ajaira_variable = ["🥇 ", "🥈 ", "🥉 "];
-                let table = "---- User-----------------------points\n";
+
+
+               let tt=`      🎀🎀 Top ${loop_length} counters 🎀🎀`;
+
+               let tcn=['Rank','Name','Points'];
+               let trank=[],tname=[],tpoint=[];
+
                 for (let t = 0; t < loop_length; t++) {
-                    let em_top = "";
-                    if (t < 3) {
-                        em_top = ajaira_variable[t];
-                    }
                     let element = d[t];
                     const Guild56 = await message.guild.members.fetch(element.ID)
                         .then(gE => {
                             // console.log(gE.user.tag);
-                            table += `\n${em_top}${gE.user.tag} --------------- ${element.data}\n`;
+                            // table += `\n${em_top}${gE.user.tag} --------------- ${element.data}\n`;
+                            trank.push(t+1);
+                            tname.push(gE.user.username);
+                            tpoint.push(element.data);
                         })
                         .catch(console.error);
                 }
-                embed.setDescription(table);
-                message.channel.send(embed);
+                // embed.setDescription(table);
+                const get_table=myFunctions.myTable(tt,tcn,trank,tname,tpoint);
+                message.channel.send(get_table);
 
 
 

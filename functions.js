@@ -14,13 +14,17 @@ module.exports = {
     Dbget: function (key) {
         Qdb.get(key);
     },
+
     Dbremove: function (key) {
         Qdb.delete(key);
     },
+
+
     DbAdd: function (key, value) {
         Qdb.add(key, value);
 
     },
+
     is_botMaster: function (messageMember) {
         var temp = 0;
         messageMember.roles.cache.forEach(f => {
@@ -34,6 +38,7 @@ module.exports = {
         else
             return false;
     },
+
     check_permissions: function (messageMember) {
         var obj = {
             isServerManager: false,
@@ -61,6 +66,7 @@ module.exports = {
 
         return obj;
     },
+
     is_allowed: function (local_prms, member_prms) {
         if (local_prms.onlyServerManager && member_prms.isServerManager)
             return true;
@@ -76,6 +82,7 @@ module.exports = {
             return true;
         return false;
     },
+
     dm_received: function (client, msg) {
         const mailbox = config.mailBox;
         const guildId = config.serverID;
@@ -108,15 +115,18 @@ module.exports = {
         }
         // console.log(msg.content);
     },
+
     formatDate: function (date) {
         return new Intl.DateTimeFormat("en-us").format(date);
     },
+
     getServerMemberByID: function (client, serverID, memberID) {
         // const guildId = "750687770904887659";
         const server = client.guilds.cache.get(serverID);
         const serverMember = server.members.cache.get(memberID);
         return serverMember;
     },
+
     get_voter_id: function (DBL_message) {
         let voter_id = "";
         for (let i = 0; i < DBL_message.length; i++) {
@@ -135,6 +145,50 @@ module.exports = {
             }
         }
         return voter_id;
+    },
+
+    myTable: function (tableTitle,columnTitle, rank, name, point) {
+        // requirements 
+        const {
+            table
+        } = require('table');
+        let tableData = [];
+        let tableConfig = {
+            columns: {
+                0: {
+                    alignment: 'center'
+                },
+                1: {
+                    alignment: 'center'
+                },
+                2: {
+                    alignment: 'center'
+                }
+            }
+        };
+
+        //local variable diclaration
+
+        let TABLE,temp_rank;
+
+        //functionality 
+
+        // title section of the table
+        tableTitle += '\n';
+
+        tableData.push(columnTitle);
+
+
+        for (let i = 0; i < name.length; i++) {
+            tableData.push([rank[i], name[i], point[i]]);
+        }
+
+        TABLE = table(tableData, tableConfig);
+        TABLE = ` \`\`\`${tableTitle}${TABLE}\`\`\``;
+
+
+        return TABLE;
     }
+
 
 }
