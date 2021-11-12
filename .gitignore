@@ -1,6 +1,0 @@
-#bot token was in .env file
-.env
-Procfile
-json.sqlite
-node_modules/
-new.txt
