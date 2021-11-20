@@ -1,0 +1,31 @@
+{
+    "name": "kryptonite",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "eslint": "^7.2.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-config-node": "^4.1.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "prettier": "^2.3.2"
+    },
+    "dependencies": {
+        "canvas": "^2.8.0",
+        "discord.js": "^13.1.0",
+        "dotenv": "^10.0.0",
+        "glob": "^7.1.7",
+        "parse-ms": "^3.0.0",
+        "pretty-ms": "^7.0.1",
+        "quick.db": "^7.1.3"
+    }
+}

@@ -1,0 +1,4 @@
+.vscode
+/private
+.eslintrc.json
+*.sqlite
